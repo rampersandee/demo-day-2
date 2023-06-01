@@ -1,35 +1,150 @@
 <!doctype html>
 <html>
+
 <head>
     <title>Login</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
 </head>
+
 <body>
-<div class="container">
-    <div class="col-sm-6 col-sm-offset-3">
-        <h1>Login</h1>
-        <% if (message.length > 0) { %>
-            <div class="alert alert-danger"><%= message %></div>
-        <% } %>
-        <!-- LOGIN FORM -->
-        <form action="/login" method="post">
-            <div class="form-group">
-                <label>Email</label>
-                <input type="text" class="form-control" name="email">
+    <div class="container">
+        <div class="content-container">
+            <div class="header-text">
+                <h1 id="welcome-text"></h1>
+                <span id="eat-text"></span>
             </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" class="form-control" name="password">
-            </div>
-            <button type="submit" class="btn btn-warning btn-lg">Login</button>
-        </form>
-        <hr>
-        <p>Need an account? <a href="/signup" class="btn-link">Signup</a></p>
-        <p>Or go <a href="/" class="btn-link">home</a>.</p>
+            <% if (message.length> 0) { %>
+                <div class="alert alert-danger">
+                    <%= message %>
+                </div>
+                <% } %>
+                    <!-- LOGIN FORM -->
+                    <form class="form-text" action="/login" method="post">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" class="form-control" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" name="password">
+                        </div>
+                        <button type="submit" class="btn-submit">Enter</button>
+                    </form>
+                    <hr>
+                    <p id="signup-text"></p>
+                    <p id="home-text"></p>
+        </div>
     </div>
-</div>
+    <script>
+        const welcomeTextElement = document.getElementById("welcome-text")
+        const welcomeText = "Welcome Back"
+        let textIndex = 0
+
+        function typeWelcomeText() {
+            welcomeTextElement.textContent += welcomeText.charAt(textIndex)
+            textIndex++
+
+            if (textIndex < welcomeText.length) {
+                setTimeout(typeWelcomeText, 75) // Adjust typing speed here (in milliseconds)
+            }
+        }
+
+        typeWelcomeText()
+
+        const eatTextElement = document.getElementById("eat-text")
+        const eatText = "Let's Eat!"
+        let eatTextIndex = 0
+
+        function typeEatText() {
+            eatTextElement.textContent += eatText.charAt(eatTextIndex)
+            eatTextIndex++
+
+            if (eatTextIndex < eatText.length) {
+                setTimeout(typeEatText, 25) // Adjust typing speed here (in milliseconds)
+            }
+        }
+
+        setTimeout(typeEatText, 1500) // Delay execution by 1500 milliseconds (1.5 seconds)
+
+        const signupTextElement = document.getElementById("signup-text")
+        const signupText = "Need an account? "
+        let signupTextIndex = 0
+
+        function typeSignupText() {
+            signupTextElement.textContent += signupText.charAt(signupTextIndex)
+            signupTextIndex++
+
+            if (signupTextIndex < signupText.length) {
+                setTimeout(typeSignupText, 75) // Adjust typing speed here (in milliseconds)
+            } else {
+                typeSignupLinkText()
+                setTimeout(typeHomeText, 1000) // Delay execution of typeHomeText by 1000 milliseconds (1 second)
+            }
+        }
+
+        function typeSignupLinkText() {
+            const signupLinkText = "Signup"
+            let signupLinkTextIndex = 0
+
+            const signupLink = document.createElement("a")
+            signupLink.href = "/signup"
+            signupLink.classList.add("btn-link")
+            signupTextElement.appendChild(signupLink)
+
+            function typeSignupLink() {
+                signupLink.textContent += signupLinkText.charAt(signupLinkTextIndex)
+                signupLinkTextIndex++
+
+                if (signupLinkTextIndex < signupLinkText.length) {
+                    setTimeout(typeSignupLink, 75) // Adjust typing speed here (in milliseconds)
+                }
+            }
+
+            setTimeout(typeSignupLink, 500) // Delay execution by 500 milliseconds (0.5 seconds)
+        }
+
+        setTimeout(typeSignupText, 3000) // Delay execution by 3000 milliseconds (3 seconds)
+
+        const homeTextElement = document.getElementById("home-text")
+        const homeText = "Or go "
+        let homeTextIndex = 0
+
+        function typeHomeText() {
+            homeTextElement.textContent += homeText.charAt(homeTextIndex)
+            homeTextIndex++
+
+            if (homeTextIndex < homeText.length) {
+                setTimeout(typeHomeText, 75) // Adjust typing speed here (in milliseconds)
+            } else {
+                typeHomeLinkText()
+            }
+        }
+
+        function typeHomeLinkText() {
+            const homeLinkText = "home"
+            let homeLinkTextIndex = 0
+
+            const homeLink = document.createElement("a")
+            homeLink.href = "/"
+            homeLink.classList.add("btn-link")
+            homeTextElement.appendChild(homeLink)
+
+            function typeHomeLink() {
+                homeLink.textContent += homeLinkText.charAt(homeLinkTextIndex)
+                homeLinkTextIndex++
+
+                if (homeLinkTextIndex < homeLinkText.length) {
+                    setTimeout(typeHomeLink, 75) // Adjust typing speed here (in milliseconds)
+                } else {
+                    homeTextElement.innerHTML += "."
+                }
+            }
+
+            setTimeout(typeHomeLink, 500) // Delay execution by 500 milliseconds (0.5 seconds)
+        }
+
+    </script>
 </body>
+
 </html>

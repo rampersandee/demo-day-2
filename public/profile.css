@@ -1,103 +1,89 @@
+* {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 100vh;
   word-wrap: break-word;
-  background-color: #E2DBBE;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  background-color: #769FB6;
 }
 
 .container {
-  width: 60%;
-  margin: 0 auto;
-  padding: 40px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  display: flex;
-  background-color: #D5D6AA;
+  width: 85%;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 30px;
+    /* display: flex; */
+    background-color: #E2DBBE;
 }
 
 .content-container {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
   align-items: center;
   background: white;
-  border: 2px #9DBBAE dashed;
+  border: 2px #9DBBAE solid;
   border-radius: 5%;
+  padding: 0px 0px 20px 0px;
 }
 
 .header-text {
-  display: flex;
-  flex-direction: column;
+  text-align: center;
+  width: 100%;
+}
+
+.user-info {
+  width: 25%;
+}
+
+#map-section {
+  width: 68%;
+    text-align: center;
+}
+
+#my-map {
+  text-align: center;
 }
 
 h1 {
-  text-align: center;
-  font-size: xxx-large;
-  color: #188FA7;
+  width: 100%;
+    text-align: center;
+    font-size: 36px;
+    color: #188FA7;
 }
 
 h2 {
-  font-size: xx-large;
-  text-align: center;
+  width: 40%;
   color: #769fb6;
-}
+  margin: 0;
+} 
 
 h3 {
-  margin: 0;
-  font-size: 8em;
-  text-align: center;
-}
-
-.login-signup {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  width: 50%;
+  color: #769fb6;
+  margin: .5px
 }
 
 a {
-  padding: 0px 0px 0px 0px;
-  width: 48%;
+  text-align: center;
+  text-decoration: none;
+}
+
+b, strong {
+  color: #769fb6;
 }
 
 .btn-primary {
-  text-align: center;
-  border-radius: 5%;
-  background-color: #63c4ea;
-  border-color: #63c4ea;
+  width: 100%;
+  color: white;
+  background-color: #769fb6;
+  border-color: #769fb6;
   font-weight: bold;
-}
-
-/*BOOTSTRAP*/
-b,
-strong {
-  color: #769fb6;
-}
-
-.jumbotron {
-  background-color: #ffffff;
-  padding: 40px;
-  margin-bottom: 30px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-}
-
-.jumbotron h1,
-.jumbotron h2 {
-  color: #188FA7;
-}
-
-.jumbotron h3 {
-  font-size: 6.2em;
-  margin-top: 30px;
-}
-
-.jumbotron p {
-  font-size: 1.2em;
-  margin-top: 30px;
-  color: #769fb6;
+  border-radius: 5px;
 }
 
 .btn-primary:hover,
@@ -115,14 +101,21 @@ strong {
   margin-right: 10px;
 }
 
+.favorite-map-marker {
+  color: #E2DBBE;
+  font-size: 2em;
+  margin-right: 10px;
+}
+
 form {
   background-color: #ffffff;
   border: 1px solid #dddddd;
   border-radius: 5px;
-  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-body>div>form>div:nth-child(3) {
+body > div > form > div:nth-child(3) {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -136,17 +129,13 @@ label {
 
 input[type="text"],
 input[type="password"] {
+  width: 100%;
   height: 40px;
   font-size: 16px;
   border-radius: 5px;
   border: 1px solid #cccccc;
   padding: 10px;
   margin-bottom: 20px;
-}
-
-#user-city,
-#user-zipcode {
-  width: 49%;
 }
 
 button[type="submit"] {
@@ -193,13 +182,9 @@ form label {
 
 /* Set the size of the div element that contains the map */
 #map {
-  height: 400px;
   text-align: center;
-  width: 100%;
-  /* position: absolute; top: 0; bottom: 0; width: 100%;  */
-  height: 400px;
-  /* The height is 400 pixels */
-  /* position: absolute; top: 0; bottom: 0; width: 100%; */
+  border-radius: 20px;
+  height: 400px; /* The height is 400 pixels */
 }
 
 .autocomplete {
@@ -207,83 +192,62 @@ form label {
   position: relative;
   display: inline-block;
 }
-
 input {
   border: 1px solid transparent;
   background-color: #f1f1f1;
   padding: 10px;
   font-size: 16px;
 }
-
 input[type=text] {
   background-color: #f1f1f1;
-  width: 100%;
+    width: 100%;
 }
-
 input[type=submit] {
   background-color: #769FB6;
   color: #fff;
 }
-
 .autocomplete-items {
   position: absolute;
-  border: 1px solid #d4d4d4;
-  border-bottom: none;
-  border-top: none;
-  z-index: 99;
-  top: 70%;
-  width: 70%;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    top: 70%;
+    width: 70%;
 }
-
 .autocomplete-items div {
   padding: 10px;
   cursor: pointer;
   background-color: #fff;
   border-bottom: 1px solid #d4d4d4;
 }
-
 .autocomplete-items div:hover {
   /*when hovering an item:*/
   background-color: #e9e9e9;
 }
-
 .autocomplete-active {
   /*when navigating through the items using the arrow keys:*/
   background-color: #769FB6 !important;
   color: #ffffff;
 }
-
-.row {
-  margin-right: 0;
-  margin-left: 0;
-}
-
-#half-p {
-  width: 50%;
-}
-
-.col-sm-6 {
-  width: 100%;
-  margin-left: 0;
-}
-
-body>div>div
-
-/*login div*/
-  {
-  width: 100%;
-  margin-left: 0;
-}
-
-#map-section {
+.btn-sm
+{
+  color: white;
   text-align: center;
+  text-decoration: none;
+  text-align: center;
+  padding: 8px 8px 8px 8px;
+  border-radius: 5px;
+  background-color: #769FB6;
+  border-color: #769FB6;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+  font-weight: bold;
 }
 
-#find-me-food,
-#my-map {
-  background: #9DBBAE;
-}
-
-#my-map {
-  color: #9DBBAE;
+#favorited-addresses {
+  height: 100px;
+  overflow-y: scroll;
+  background: #769fb6;
+  border-radius: 5px;
+  color: white;
 }

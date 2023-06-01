@@ -958,11 +958,11 @@ module.exports = function(app, passport, db) {
 
     // PROFILE SECTION =========================
     app.get('/profile', isLoggedIn, function(req, res) {
-        db.collection('messages').find().toArray((err, result) => {
+        db.collection('favorites').find().toArray((err, result) => {
           if (err) return console.log(err)
           res.render('profile.ejs', {
             user : req.user,
-            messages: result
+            favorites: result
           })
         })
     });
@@ -1006,9 +1006,18 @@ module.exports = function(app, passport, db) {
       })
     })
 
-    app.delete('/messages', (req, res) => {
+    app.post('/favorites', (req, res) => {
+      console.log('testing')
+      db.collection('favorites').save({name: req.body.name}, (err, result) => {
+        if (err) return console.log(err)
+        console.log('saved to database')
+        res.redirect('/profile')
+      })
+    })
+
+    app.delete('/favorites', (req, res) => {
       const _id = ObjectId(req.body._id)
-      db.collection('messages').findOneAndDelete({_id}, (err, result) => {
+      db.collection('favorites').findOneAndDelete({_id}, (err, result) => {
         if (err) return res.send(500, err)
         res.send('Message deleted!')
       })

@@ -3,54 +3,85 @@
 
 <head>
     <title>Find Me Food</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .container.hidden {
+            opacity: 0;
+        }
+
+        .container.fade-in {
+            transition: opacity 2s;
+            opacity: 1;
+        }
+    </style>
 </head>
-<style>
-    #foodEmoji {
-        transition: transform 0.5s, opacity 1.5s;
-    }
-</style>
+
 <body>
-    <div class="container">
+    <div class="container hidden">
 
-        <div class="jumbotron text-center">
-            <h1>Find Me Food</h1>
-            <h2>Let's find you some food.</h2>
-
-            <h3 id='foodEmoji'>🍞</h3>
-
-            <a href="/login" class="btn btn-primary"><span class="fa fa-user"></span> Login</a>
-            <a href="/signup" class="btn btn-primary"><span class="fa fa-user"></span> Signup</a>
-
-            <p><span class="fa fa-map-marker"></span> We use your location to find the closest and cheapest stores near
-                you</p>
+        <div class="content-container">
+            <div class="header-text">
+                <h1>Find Me Food</h1>
+                <h2>Let's find you some food.</h2>
+                <h3 id="food-emoji">🍞</h3>
+            </div>
+            <div class="login-signup">
+                <a href="/login" class="btn btn-primary"><span class="fa fa-user"></span> Login</a>
+                <a href="/signup" class="btn btn-primary"><span class="fa fa-user"></span> Signup</a>
+            </div>
+            <p><span class="fa fa-map-marker"></span></p>
         </div>
 
     </div>
+    <script>
+        const foodEmojis = ['🥫', '🥚', '🥑', '🥔', '🍞'] // Array of food emojis
+        let currentIndex = 0 // Current index of the emoji array
+
+        function cycleFoodEmojis() {
+            const foodEmojiElement = document.getElementById("food-emoji")
+            if (foodEmojiElement) {
+                foodEmojiElement.style.opacity = '0' // Set opacity to 0
+
+                setTimeout(() => {
+                    foodEmojiElement.textContent = foodEmojis[currentIndex] // Update the emoji
+                    foodEmojiElement.style.opacity = '1' // Set opacity to 1
+
+                    currentIndex = (currentIndex + 1) % foodEmojis.length // Increment the index
+                    setTimeout(cycleFoodEmojis, 1500) // Repeat after 1500 milliseconds
+                }, 500) // Delay before updating the emoji
+            }
+        }
+
+        cycleFoodEmojis() // Start the cycle
+
+        const locationTextElement = document.querySelector("p")
+        const text = "We use your location to find the closest and cheapest stores near you"
+        let index = 0
+
+        function typeLocationText() {
+            locationTextElement.innerHTML += text.charAt(index)
+            index++
+
+            if (index < text.length) {
+                setTimeout(typeLocationText, 25) // Adjust typing speed here (in milliseconds)
+            }
+        }
+
+        setTimeout(typeLocationText, 2500)
+
+        window.addEventListener("load", function () {
+            setTimeout(showContainer, 1000) // Delay execution by 2000 milliseconds (2 seconds)
+        })
+
+        function showContainer() {
+            let containerElements = document.getElementsByClassName("container")
+            let containerElement = containerElements[0] // Access the first element from the collection
+            containerElement.classList.add("fade-in") // Add the fade-in class to trigger the transition
+            containerElement.classList.remove("hidden")
+        }
+    </script>
+
 </body>
-<script>
-    const foodEmojis = ['🥫', '🥚', '🥑', '🥔', '🍞']; // Array of food emojis
-    let currentIndex = 0; // Current index of the emoji array
-
-    function cycleFoodEmojis() {
-    const foodEmojiElement = document.getElementById('foodEmoji');
-    if (foodEmojiElement) {
-        foodEmojiElement.style.opacity = '0'; // Set opacity to 0
-
-        setTimeout(() => {
-            foodEmojiElement.textContent = foodEmojis[currentIndex]; // Update the emoji
-            foodEmojiElement.style.opacity = '1'; // Set opacity to 1
-
-            currentIndex = (currentIndex + 1) % foodEmojis.length; // Increment the index
-            setTimeout(cycleFoodEmojis, 1500); // Repeat after 1500 milliseconds
-        }, 500); // Delay before updating the emoji
-    }
-}
-
-cycleFoodEmojis(); // Start the cycle // Start the cycle
-</script>
 
 </html>

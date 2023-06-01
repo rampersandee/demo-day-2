@@ -3,40 +3,34 @@
 
 <head>
     <title>Profile Page</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="profile.css">
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
     <link rel="stylesheet"
         href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css"
         type="text/css">
-
 </head>
 
 <body>
     <div class="container">
-
-        <div class="page-header text-center">
-            <h1 id="find-me-food">Find Me Food</h1>
-            <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-        </div>
-
-        <div class="row">
-
+        <div class="content-container">
+            <div class="header-text">
+                <h1>Find Me Food</h1>
+                <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+            </div>
             <!-- LOCAL INFORMATION -->
-            <div class="col-sm-6">
-                <div class="well">
-                    <h3>Profile</h3>
-                    <!-- CHANGES-START -->
-                    <p class="half-p">
+            <div class="user-info">
+                <!-- CHANGES-START -->
+                <div class="profile-container">
+                    <h2>Profile</h2>
+                    <p>
                         <strong>Area</strong>:<br>
                         <span id="user-zipcode">
                             <%= user.local.zipcode %>
                         </span>
                     </p>
-                    <p class="half-p">
+                    <p>
                         <strong>Instructions</strong>:<br><span>
                             Using your location's ZIP code, (not your full address) this program finds nearby stores,
                             displaying their locations on a map, along with product details and prices, helping you find
@@ -44,6 +38,17 @@
                         </span><br>
                         <span>
                     </p>
+                    <h3>Favorited Addresses</h3>
+                    <div id="favorited-addresses">
+                        <ul>
+                          <% for(var i=0; i<favorites.length; i++) { %>
+                            <li class="favorites">
+                              <span><%= favorites[i].name %></span>
+                              <span><i class="fa fa-trash" aria-hidden="true" data-id="<%= favorites[i]._id %>"></i></span>
+                            </li>
+                          <% } %>
+                        </ul>
+                      </div>
                     <h3>Search</h3>
                     <% if (user.local.email) { %>
                         <form autocomplete="off">
@@ -57,13 +62,16 @@
                 </div>
             </div>
             <!-- MAP SECTION -->
-            <h2 id="my-map">.</h2>
-            <section id='map-section'>
+
+            <div id='map-section'>
+                <h2 id="my-map">My Map</h2>
                 <div id="map"></div>
-            </section>
+            </div>
         </div>
     </div>
-
+    <script>
+       const favoritesArray = <%- JSON.stringify(favorites) %>
+        </script>
     <script src="main.js"></script>
     <!-- CHANGES-START -->
     <script

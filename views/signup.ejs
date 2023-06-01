@@ -1,97 +1,144 @@
 <!doctype html>
 <html>
+
 <head>
-    <title>Signup | Findr</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <title>Signup</title>
     <link rel="stylesheet" href="font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="signup.css">
 </head>
+
 <body>
-<div class="container">
+    <div class="container">
+        <div class="content-container">
+            <div class="header-text">
+                <h1 id="header-title"></h1>
+            </div>
 
-    <h1>Let's Find Food</h1>
+            <form class="form-text" action="/signup" method="post">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" name="email" id="email" placeholder ="Email">
+                </div>
 
-    <form action="/signup" method="post">
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" class="form-control" name="email" id="email" required>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder ="Password">
+                </div>
+
+                <!-- CHANGES-START -->
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" name="street" id="user-street"
+                        placeholder="Street">
+                    <div class="user-form">
+                        <input type="text" class="form-control" name="city" id="user-city" required placeholder="City">
+                        <input type="text" class="form-control" name="zipcode" id="user-zipcode" required
+                            placeholder="Zipcode">
+                    </div>
+                </div>
+                <!-- CHANGES-END -->
+
+                <button type="submit" class="btn-submit">Create Account</button>
+
+            </form>
+            <p id="signup-text"></p>
+            <p id="home-text"></p>
         </div>
- 
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" id="password" required>
-        </div>
+    </div>
+    <script>
+        const letsFindTextElement = document.getElementById("header-title")
+        const letsFindText = "Let's Find Food"
+        let textIndex = 0
 
-        <!-- CHANGES-START -->
-        <div class="form-group">
-            <label for="address">Address</label>
-            <input type="text" class="form-control" name="street" id="user-street" required placeholder = "Street">
-            <input type="text" class="form-control" name="city" id="user-city" required placeholder = "City">
-            <!-- <select class="form-control" name="state" id="user-map" required placeholder = "State">
-                <option value="" selected disabled>State</option>
-                <option value="AL">Alabama</option>
-                <option value="AK">Alaska</option>
-                <option value="AZ">Arizona</option>
-                <option value="AR">Arkansas</option>
-                <option value="CA">California</option>
-                <option value="CO">Colorado</option>
-                <option value="CT">Connecticut</option>
-                <option value="DE">Delaware</option>
-                <option value="DC">District Of Columbia</option>
-                <option value="FL">Florida</option>
-                <option value="GA">Georgia</option>
-                <option value="HI">Hawaii</option>
-                <option value="ID">Idaho</option>
-                <option value="IL">Illinois</option>
-                <option value="IN">Indiana</option>
-                <option value="IA">Iowa</option>
-                <option value="KS">Kansas</option>
-                <option value="KY">Kentucky</option>
-                <option value="LA">Louisiana</option>
-                <option value="ME">Maine</option>
-                <option value="MD">Maryland</option>
-                <option value="MA">Massachusetts</option>
-                <option value="MI">Michigan</option>
-                <option value="MN">Minnesota</option>
-                <option value="MS">Mississippi</option>
-                <option value="MO">Missouri</option>
-                <option value="MT">Montana</option>
-                <option value="NE">Nebraska</option>
-                <option value="NV">Nevada</option>
-                <option value="NH">New Hampshire</option>
-                <option value="NJ">New Jersey</option>
-                <option value="NM">New Mexico</option>
-                <option value="NY">New York</option>
-                <option value="NC">North Carolina</option>
-                <option value="ND">North Dakota</option>
-                <option value="OH">Ohio</option>
-                <option value="OK">Oklahoma</option>
-                <option value="OR">Oregon</option>
-                <option value="PA">Pennsylvania</option>
-                <option value="RI">Rhode Island</option>
-                <option value="SC">South Carolina</option>
-                <option value="SD">South Dakota</option>
-                <option value="TN">Tennessee</option>
-                <option value="TX">Texas</option>
-                <option value="UT">Utah</option>
-                <option value="VT">Vermont</option>
-                <option value="VA">Virginia</option>
-                <option value="WA">Washington</option>
-                <option value="WV">West Virginia</option>
-                <option value="WI">Wisconsin</option>
-                <option value="WY">Wyoming</option>
-            </select> -->
-            <input type="text" class="form-control" name="zipcode" id="user-zipcode" required placeholder = "Zipcode">
-        </div>
-        <!-- CHANGES-END -->
+        function typeletsFindText() {
+            letsFindTextElement.textContent += letsFindText.charAt(textIndex)
+            textIndex++
 
-        <button type="submit" class="btn-submit">Create Account</button>
-    </form>
+            if (textIndex < letsFindText.length) {
+                setTimeout(typeletsFindText, 75) // Adjust typing speed here (in milliseconds)
+            }
+        }
 
-    <p>Already a member? <a class='btn-link' href="/login">Log in</a></p>
-    <p>Go back <a class='btn-link' href="/">home</a>.</p>
+        typeletsFindText()
 
-</div>
+        const signupTextElement = document.getElementById("signup-text")
+        const signupText = "Need an account? "
+        let signupTextIndex = 0
+
+        function typeSignupText() {
+            signupTextElement.textContent += signupText.charAt(signupTextIndex)
+            signupTextIndex++
+
+            if (signupTextIndex < signupText.length) {
+                setTimeout(typeSignupText, 75) // Adjust typing speed here (in milliseconds)
+            } else {
+                typeSignupLinkText()
+                setTimeout(typeHomeText, 1000) // Delay execution of typeHomeText by 1000 milliseconds (1 second)
+            }
+        }
+
+        function typeSignupLinkText() {
+            const signupLinkText = "Signup"
+            let signupLinkTextIndex = 0
+
+            const signupLink = document.createElement("a")
+            signupLink.href = "/signup"
+            signupLink.classList.add("btn-link")
+            signupTextElement.appendChild(signupLink)
+
+            function typeSignupLink() {
+                signupLink.textContent += signupLinkText.charAt(signupLinkTextIndex)
+                signupLinkTextIndex++
+
+                if (signupLinkTextIndex < signupLinkText.length) {
+                    setTimeout(typeSignupLink, 75) // Adjust typing speed here (in milliseconds)
+                }
+            }
+
+            setTimeout(typeSignupLink, 500) // Delay execution by 500 milliseconds (0.5 seconds)
+        }
+
+        setTimeout(typeSignupText, 3000) // Delay execution by 3000 milliseconds (3 seconds)
+
+        const homeTextElement = document.getElementById("home-text")
+        const homeText = "Or go "
+        let homeTextIndex = 0
+
+        function typeHomeText() {
+            homeTextElement.textContent += homeText.charAt(homeTextIndex)
+            homeTextIndex++
+
+            if (homeTextIndex < homeText.length) {
+                setTimeout(typeHomeText, 75) // Adjust typing speed here (in milliseconds)
+            } else {
+                typeHomeLinkText()
+            }
+        }
+
+        function typeHomeLinkText() {
+            const homeLinkText = "home"
+            let homeLinkTextIndex = 0
+
+            const homeLink = document.createElement("a")
+            homeLink.href = "/"
+            homeLink.classList.add("btn-link")
+            homeTextElement.appendChild(homeLink)
+
+            function typeHomeLink() {
+                homeLink.textContent += homeLinkText.charAt(homeLinkTextIndex)
+                homeLinkTextIndex++
+
+                if (homeLinkTextIndex < homeLinkText.length) {
+                    setTimeout(typeHomeLink, 75) // Adjust typing speed here (in milliseconds)
+                } else {
+                    homeTextElement.innerHTML += "."
+                }
+            }
+
+            setTimeout(typeHomeLink, 500) // Delay execution by 500 milliseconds (0.5 seconds)
+        }
+
+    </script>
 </body>
+
 </html>
