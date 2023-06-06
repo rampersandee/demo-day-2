@@ -10,7 +10,7 @@ let trash = document.getElementsByClassName("fa-trash");
 function mapDisplay(apiData) {
 
   // ZIPCODE FETCH REQUESTS
-  fetch(`http://api.zippopotam.us/us/${userZipcode}`)
+  fetch(`https://api.zippopotam.us/us/${userZipcode}`)
     .then(response => response.json())
     .then(zipData => {
       console.log(zipData, 'ZIP');
