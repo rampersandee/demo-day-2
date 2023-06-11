@@ -91,8 +91,8 @@ b, strong {
 .btn-primary:active,
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary {
-  background-color: #63c4ea;
-  border-color: #63c4ea;
+  background-color: #9DBBAE;
+  border-color: #9DBBAE;
 }
 
 .fa-map-marker {
@@ -139,7 +139,7 @@ input[type="password"] {
 }
 
 button[type="submit"] {
-  background-color: #63c4ea;
+  background-color: #9DBBAE;
   border: none;
   border-radius: 5px;
   color: #ffffff;
@@ -176,7 +176,7 @@ form label {
 }
 
 .btn-submit:hover {
-  background-color: #63c4ea;
+  background-color: #9DBBAE;
 }
 
 

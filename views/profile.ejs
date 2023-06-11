@@ -18,7 +18,7 @@
         <div class="content-container">
             <div class="header-text">
                 <h1>Find Me Food</h1>
-                <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+                <a href="/logout" class="btn btn-default btn-primary btn-sm">Logout</a>
             </div>
             <!-- LOCAL INFORMATION -->
             <div class="user-info">
@@ -29,7 +29,15 @@
                         <strong>Area</strong>:<br>
                         <span id="user-zipcode">
                             <%= user.local.zipcode %>
+                            <button type="button" id="update-toggle" class="btn btn-primary">
+                                <i class="fa-solid fa-pencil" aria-hidden="true"></i>
+                            </button>
                         </span>
+                    <section id="form">
+                        <input id="new-zipcode" placeholder='Update Zipcode' maxlength="5">
+                        <button class="btn btn-primary" id="update-zipcode" data-id="<%= user._id %>">Change
+                            Zipcode</button>
+                    </section>
                     </p>
                     <p>
                         <strong>Instructions</strong>:<br><span>
@@ -42,14 +50,17 @@
                     <h3>Favorited Addresses</h3>
                     <div id="favorited-addresses">
                         <ul>
-                          <% for(var i=0; i<favorites.length; i++) { %>
-                            <li class="favorites">
-                              <span><%= favorites[i].name %></span>
-                              <span><i class="fa fa-trash" aria-hidden="true" data-id="<%= favorites[i]._id %>"></i></span>
-                            </li>
-                          <% } %>
+                            <% for(var i=0; i<favorites.length; i++) { %>
+                                <li class="favorites">
+                                    <span>
+                                        <%= favorites[i].name %>
+                                    </span>
+                                    <span><i class="fa fa-trash" aria-hidden="true"
+                                            data-id="<%= favorites[i]._id %>"></i></span>
+                                </li>
+                                <% } %>
                         </ul>
-                      </div>
+                    </div>
                     <h3>Search</h3>
                     <% if (user.local.email) { %>
                         <form autocomplete="off">
@@ -70,9 +81,10 @@
             </div>
         </div>
     </div>
+    <script src="https://kit.fontawesome.com/0672b027c3.js" crossorigin="anonymous"></script>
     <script>
-       const favoritesArray = <%- JSON.stringify(favorites) %>
-        </script>
+        const favoritesArray = <% - JSON.stringify(favorites) %>
+    </script>
     <script src="main.js"></script>
     <!-- CHANGES-START -->
     <script

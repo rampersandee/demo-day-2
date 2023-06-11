@@ -995,6 +995,16 @@ module.exports = function(app, passport, db) {
       console.log(match);
       response.send(match);
     });
+
+    app.put('/update', (req, res) => {
+      const _id = ObjectId(req.body.id)
+      const newZipcode = req.body.newZipcode
+      db.collection('users').findOneAndUpdate({_id}, {
+        $set: {
+          "local.zipcode": newZipcode
+        }
+      })
+    })
     
 // message board routes ===============================================================
 

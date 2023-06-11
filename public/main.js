@@ -1,10 +1,13 @@
 // GLOBALS
 let userButton = document.getElementById('user-button');
 let userZipcode = document.getElementById("user-zipcode").innerText;
+let updateZipcodeButton = document.getElementById('update-zipcode')
+let toggleZipcodeButton = document.getElementById('update-toggle')
+let form = document.getElementById('form')
+let isHidden = false
 let storeNames = ['Aldi', 'Kroger', "Trader Joe's", 'Publix', 'Walmart'];
 let mapboxAccessToken = 'pk.eyJ1IjoidXNlcmJqbSIsImEiOiJjbGhsOGhoNG4waGd4M2ZxeDY1N29xZjRpIn0.1_tP4tHQee4ix0d9fOd5CQ';
 let trash = document.getElementsByClassName("fa-trash");
-
 
 // FUNCTIONS
 function mapDisplay(apiData) {
@@ -72,7 +75,7 @@ function mapDisplay(apiData) {
                   const storeAddress = reverseData.features[0].place_name
                   const locationFavorited = favoritesArray.find(f => f.name === storeAddress) ? true : false
                   if (locationFavorited) {
-                    marker.getElement().style.backgroundColor = 'red';
+                    marker.getElement().style.color = 'gold';
                     console.log(marker.getElement(), "FAVORITE")
                   }
 
@@ -296,6 +299,35 @@ function addFavorite(storeName) {
     });
 }
 
+function updateZipcode(e) {
+  const id = e.target.dataset.id
+  const newZipcode = document.getElementById('new-zipcode').value
+  console.log(newZipcode)
+  fetch('/update', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      id,
+      newZipcode
+    })
+  })
+  window.location.reload();
+}
+
+function toggleZipcode() {
+  isHidden = !isHidden
+  if (isHidden) {
+    console.log('HIDDEN')
+    form.style.display = 'none'
+  }
+  else {
+    console.log('NOT HIDDEN')
+    form.style.display = 'block'
+  }
+}
+
 Array.from(trash).forEach(function (element) {
   element.addEventListener('click', function (e) {
     const _id = e.target.dataset.id;
@@ -324,8 +356,9 @@ Array.from(trash).forEach(function (element) {
 // FUNCTION CALLS
 mapDisplay();
 setupAutocomplete();
+toggleZipcode()
 
 // BUTTONS
 userButton.addEventListener('click', productSearch);
-
-
+updateZipcodeButton.addEventListener('click', updateZipcode)
+toggleZipcodeButton.addEventListener('click', toggleZipcode)
